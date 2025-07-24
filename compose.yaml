@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - spring-postgres
+    environment:
+      - POSTGRES_DB=photoselect
+      - POSTGRES_PASSWORD=photoselect
+    ports:
+      - 5432:5432
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+volumes:
+  db-data:
+  rabbitmq_data:
+networks:
+  spring-postgres:
